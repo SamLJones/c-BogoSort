@@ -160,6 +160,30 @@ int main()
                    std::cin.get();
                    break;
                }
+
+		else if (choice == "Miracle" || choice == "miracle")
+		{
+			validInput = true;
+			RandomiseNumbers(OriginalNumbers, SelectedNumbers);
+
+            if (IsSorted(SelectedNumbers))
+            {
+				std::cout << "ITS A MIRACLE!" << std::endl;
+            }
+            else
+			{
+				std::cout << "Not a miracle" << std::endl;
+			}
+            for (int num : SelectedNumbers)
+            {
+                std::cout << num << " ";
+            }
+            std::cout << std::endl;
+            std::cout << "Press Enter to exit...";
+            std::cin.ignore();
+            std::cin.get();
+            break;
+		}
     }
     return 0;
 }
