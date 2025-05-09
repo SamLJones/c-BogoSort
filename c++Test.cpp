@@ -42,6 +42,7 @@ int main()
 {
     srand(static_cast<unsigned int>(time(0)));
 
+    int counter = 1;
     int listSize;
     std::cout << "Enter the size of the list: ";
     std::cin >> listSize;
@@ -64,6 +65,7 @@ int main()
             }
             std::cout << std::endl;
             std::cout << "Sorted!" << std::endl;
+			std::cout << "Total iterations: " << counter << std::endl;
             exit(0);
         }
         else
@@ -73,6 +75,7 @@ int main()
                 std::cout << num << " ";
             }
             std::cout << std::endl;
+            counter++;
         }
     }
 
