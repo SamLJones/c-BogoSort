@@ -58,6 +58,10 @@ int main()
         visual = false;
     }
 
+    int listSize;
+    std::cout << "Enter the size of the list: ";
+    std::cin >> listSize;
+
     while (!validInput)
     {
         std::cout << "Choose your sorting algorithm" << std::endl;
@@ -66,9 +70,6 @@ int main()
         std::cin >> choice;
 
         int counter = 1;
-        int listSize;
-        std::cout << "Enter the size of the list: ";
-        std::cin >> listSize;
 
         std::vector<int> OriginalNumbers;
         CreateList(OriginalNumbers, listSize);
