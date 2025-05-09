@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
+#include <chrono>
 
 void RandomiseNumbers(std::vector<int>& Numbers, std::vector<int>& SelectedNumbers)
 {
@@ -52,6 +53,8 @@ int main()
 
     std::vector<int> SelectedNumbers(listSize);
 
+	auto start = std::chrono::high_resolution_clock::now();
+
     while (true)
     {
         std::vector<int> Numbers = OriginalNumbers;
@@ -59,6 +62,8 @@ int main()
 
         if (IsSorted(SelectedNumbers))
         {
+			auto end = std::chrono::high_resolution_clock::now();
+			auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
             for (int num : SelectedNumbers)
             {
                 std::cout << num << " ";
@@ -66,7 +71,11 @@ int main()
             std::cout << std::endl;
             std::cout << "Sorted!" << std::endl;
 			std::cout << "Total iterations: " << counter << std::endl;
-            exit(0);
+			std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;
+            std::cout << "Press Enter to exit...";
+            std::cin.ignore();
+            std::cin.get();
+            break;
         }
         else
         {
