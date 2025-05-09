@@ -41,57 +41,88 @@ void CreateList(std::vector<int>& OriginalNumbers, int listSize)
 
 int main()
 {
+    bool validInput = false;
+
     srand(static_cast<unsigned int>(time(0)));
 
-	std::cout << "Choose your sorting algorithm" << std::endl;
-	std::cout << "Bogo, Stalin, Miracle" << std::endl;
-	std::string choice;
-	std::cin >> choice;
-
-    int counter = 1;
-    int listSize;
-    std::cout << "Enter the size of the list: ";
-    std::cin >> listSize;
-
-    std::vector<int> OriginalNumbers;
-    CreateList(OriginalNumbers, listSize);
-
-    std::vector<int> SelectedNumbers(listSize);
-
-	auto start = std::chrono::high_resolution_clock::now();
-
-    while (true)
+    while (!validInput)
     {
-        std::vector<int> Numbers = OriginalNumbers;
-        RandomiseNumbers(Numbers, SelectedNumbers);
+        std::cout << "Choose your sorting algorithm" << std::endl;
+        std::cout << "Bogo, Stalin, Miracle" << std::endl;
+        std::string choice;
+        std::cin >> choice;
 
-        if (IsSorted(SelectedNumbers))
+        int counter = 1;
+        int listSize;
+        std::cout << "Enter the size of the list: ";
+        std::cin >> listSize;
+
+        std::vector<int> OriginalNumbers;
+        CreateList(OriginalNumbers, listSize);
+
+        std::vector<int> SelectedNumbers(listSize);
+
+        auto start = std::chrono::high_resolution_clock::now();
+
+        if (choice == "Bogo" || choice == "bogo")
         {
-			auto end = std::chrono::high_resolution_clock::now();
-			auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-            for (int num : SelectedNumbers)
+            validInput = true;
+            while (true)
             {
-                std::cout << num << " ";
+                std::vector<int> Numbers = OriginalNumbers;
+                RandomiseNumbers(Numbers, SelectedNumbers);
+
+                if (IsSorted(SelectedNumbers))
+                {
+                    auto end = std::chrono::high_resolution_clock::now();
+                    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+                    for (int num : SelectedNumbers)
+                    {
+                        std::cout << num << " ";
+                    }
+                    std::cout << std::endl;
+                    std::cout << "Sorted!" << std::endl;
+                    std::cout << "Total iterations: " << counter << std::endl;
+                    std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;
+                    std::cout << "Press Enter to exit...";
+                    std::cin.ignore();
+                    std::cin.get();
+                    break;
+                }
+                else
+                {
+                    for (int num : SelectedNumbers)
+                    {
+                        std::cout << num << " ";
+                    }
+                    std::cout << std::endl;
+                    counter++;
+                }
             }
-            std::cout << std::endl;
-            std::cout << "Sorted!" << std::endl;
-			std::cout << "Total iterations: " << counter << std::endl;
-			std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;
-            std::cout << "Press Enter to exit...";
-            std::cin.ignore();
-            std::cin.get();
-            break;
         }
-        else
+        else if (choice == "Stalin" || choice == "stalin")
         {
-            for (int num : SelectedNumbers)
+            validInput = true;
+            int i = 1;
+            RandomiseNumbers(OriginalNumbers, SelectedNumbers);
+            while (i < static_cast<int>(SelectedNumbers.size()))
             {
-                std::cout << num << " ";
+                if (SelectedNumbers[i - 1] > SelectedNumbers[i])
+                {
+                    SelectedNumbers.erase(SelectedNumbers.begin() + i);
+                }
+                else
+                {
+                    i++;
+                }
+
+                for (int num : SelectedNumbers)
+                {
+                    std::cout << num << " ";
+                }
+                std::cout << std::endl;
             }
-            std::cout << std::endl;
-            counter++;
         }
     }
-
     return 0;
 }
