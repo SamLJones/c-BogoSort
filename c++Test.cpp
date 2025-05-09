@@ -45,6 +45,19 @@ int main()
 
     srand(static_cast<unsigned int>(time(0)));
 
+    bool visual;
+    std::string visualQuery;
+    std::cout << " Would you like visual representation (Yes or No) ";
+    std::cin >> visualQuery;
+    if (visualQuery == "yes" || visualQuery == "Yes")
+    {
+        visual = true;
+    }
+    else
+    {
+        visual = false;
+    }
+
     while (!validInput)
     {
         std::cout << "Choose your sorting algorithm" << std::endl;
@@ -91,38 +104,61 @@ int main()
                 }
                 else
                 {
-                    for (int num : SelectedNumbers)
+                    if (visual)
                     {
-                        std::cout << num << " ";
+                        for (int num : SelectedNumbers)
+                        {
+                            std::cout << num << " ";
+                        }
+                        std::cout << std::endl;
                     }
-                    std::cout << std::endl;
                     counter++;
                 }
             }
         }
         else if (choice == "Stalin" || choice == "stalin")
-        {
-            validInput = true;
-            int i = 1;
-            RandomiseNumbers(OriginalNumbers, SelectedNumbers);
-            while (i < static_cast<int>(SelectedNumbers.size()))
-            {
-                if (SelectedNumbers[i - 1] > SelectedNumbers[i])
-                {
-                    SelectedNumbers.erase(SelectedNumbers.begin() + i);
-                }
-                else
-                {
-                    i++;
-                }
+               {
+                   validInput = true;
+                   auto start = std::chrono::high_resolution_clock::now();
+                   int i = 1;
+                   RandomiseNumbers(OriginalNumbers, SelectedNumbers);
 
-                for (int num : SelectedNumbers)
-                {
-                    std::cout << num << " ";
-                }
-                std::cout << std::endl;
-            }
-        }
+                   while (i < static_cast<int>(SelectedNumbers.size()))
+                   {
+                       if (SelectedNumbers[i - 1] > SelectedNumbers[i])
+                       {
+                           SelectedNumbers.erase(SelectedNumbers.begin() + i);
+                       }
+                       else
+                       {
+                           i++;
+                       }
+
+                       if (visual)
+                       {
+                           for (int num : SelectedNumbers)
+                           {
+                               std::cout << num << " ";
+                           }
+                           std::cout << std::endl;
+                       }
+                   }
+
+                   for (int num : SelectedNumbers)
+                   {
+                       std::cout << num << " ";
+                   }
+                   std::cout << std::endl;
+
+                   auto end = std::chrono::high_resolution_clock::now();
+                   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+                   std::cout << "Sorted!" << std::endl;
+                   std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;
+                   std::cout << "Press Enter to exit...";
+                   std::cin.ignore();
+                   std::cin.get();
+                   break;
+               }
     }
     return 0;
 }
