@@ -23,6 +23,4 @@ int main()
 
         Numbers.erase(Numbers.begin() + RandomInt);
     }
-
-    std::cout << "Completed";
 }
