@@ -1,10 +1,9 @@
 #include <random>
 #include <iostream>
 #include <vector>
-#include <array>
 #include <ctime>
 
-void RandomiseNumbers(std::vector<int>& Numbers, std::array<int, 10>& SelectedNumbers)
+void RandomiseNumbers(std::vector<int>& Numbers, std::vector<int>& SelectedNumbers)
 {
     int i = 0;
 
@@ -19,9 +18,9 @@ void RandomiseNumbers(std::vector<int>& Numbers, std::array<int, 10>& SelectedNu
     }
 }
 
-bool IsSorted(std::array<int, 10>& SelectedNumbers)
+bool IsSorted(std::vector<int>& SelectedNumbers)
 {
-    for (int i = 0; i < 9; i++)
+    for (size_t i = 0; i < SelectedNumbers.size() - 1; i++)
     {
         if (SelectedNumbers[i] > SelectedNumbers[i + 1])
         {
@@ -31,12 +30,26 @@ bool IsSorted(std::array<int, 10>& SelectedNumbers)
     return true;
 }
 
+void CreateList(std::vector<int>& OriginalNumbers, int listSize)
+{
+    for (int i = 1; i <= listSize; i++)
+    {
+        OriginalNumbers.push_back(i);
+    }
+}
+
 int main()
 {
     srand(static_cast<unsigned int>(time(0)));
 
-    std::vector<int> OriginalNumbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-    std::array<int, 10> SelectedNumbers;
+    int listSize;
+    std::cout << "Enter the size of the list: ";
+    std::cin >> listSize;
+
+    std::vector<int> OriginalNumbers;
+    CreateList(OriginalNumbers, listSize);
+
+    std::vector<int> SelectedNumbers(listSize);
 
     while (true)
     {
