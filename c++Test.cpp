@@ -4,7 +4,7 @@
 #include <array>
 #include <ctime>
 
-void RandomiseNumbers(std::vector<int>& Numbers, std::array<int, 10>& SelectedNumbers)
+void RandomiseNumbers(std::vector<int>& Numbers, std::array<int, 4>& SelectedNumbers)
 {
     int i = 0;
 
@@ -19,9 +19,9 @@ void RandomiseNumbers(std::vector<int>& Numbers, std::array<int, 10>& SelectedNu
     }
 }
 
-bool IsSorted(std::array<int, 10>& SelectedNumbers)
+bool IsSorted(std::array<int, 4>& SelectedNumbers)
 {
-    for (int i = 0; i < 9; i++)
+    for (int i = 0; i < 3; i++)
     {
         if (SelectedNumbers[i] > SelectedNumbers[i + 1])
         {
@@ -35,8 +35,8 @@ int main()
 {
     srand(static_cast<unsigned int>(time(0)));
 
-    std::vector<int> OriginalNumbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-    std::array<int, 10> SelectedNumbers;
+    std::vector<int> OriginalNumbers = { 1, 2, 3, 4 };
+    std::array<int, 4> SelectedNumbers;
 
     while (true)
     {
