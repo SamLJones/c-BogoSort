@@ -43,6 +43,11 @@ int main()
 {
     srand(static_cast<unsigned int>(time(0)));
 
+	std::cout << "Choose your sorting algorithm" << std::endl;
+	std::cout << "Bogo, Stalin, Miracle" << std::endl;
+	std::string choice;
+	std::cin >> choice;
+
     int counter = 1;
     int listSize;
     std::cout << "Enter the size of the list: ";
