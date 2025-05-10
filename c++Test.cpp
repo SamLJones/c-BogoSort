@@ -6,18 +6,17 @@
 
 void RandomiseNumbers(std::vector<int>& Numbers, std::vector<int>& SelectedNumbers)
 {
-    int i = 0;
+    SelectedNumbers.clear();
 
     while (!Numbers.empty())
     {
         int RandomInt = rand() % Numbers.size();
         int Selected = Numbers[RandomInt];
-        SelectedNumbers[i] = Selected;
-        i++;
-
+        SelectedNumbers.push_back(Selected);
         Numbers.erase(Numbers.begin() + RandomInt);
     }
 }
+
 
 bool IsSorted(std::vector<int>& SelectedNumbers)
 {
@@ -184,6 +183,45 @@ int main()
             std::cin.get();
             break;
 		}
+
+        else if (choice == "Elon" || choice == "elon")
+        {
+            validInput = true;
+            
+			int elonSize = listSize / 2;
+
+			RandomiseNumbers(OriginalNumbers, SelectedNumbers);
+
+            while (elonSize > 0)
+            {
+				SelectedNumbers.erase(SelectedNumbers.begin() + 1);
+                if (visual)
+                {
+                    for (int num : SelectedNumbers)
+                    {
+                        std::cout << num << " ";
+                    }
+                }
+				elonSize--;
+            }
+
+			for (int num : SelectedNumbers)
+			{
+				std::cout << num << " ";
+			}
+
+			std::cout << std::endl;
+			std::cout << "List is now sorted to DOGE standards!" << std::endl;
+			std::cout << "Press Enter to exit...";
+			std::cin.ignore();
+			std::cin.get();
+			break;
+		}
+		else
+		{
+			std::cout << "Invalid choice, please try again." << std::endl;
+        }
+
     }
     return 0;
 }
