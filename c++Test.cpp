@@ -64,7 +64,7 @@ int main()
     while (!validInput)
     {
         std::cout << "Choose your sorting algorithm" << std::endl;
-        std::cout << "Bogo, Stalin, Miracle" << std::endl;
+        std::cout << "Bogo, Stalin, Miracle, Elon" << std::endl;
         std::string choice;
         std::cin >> choice;
 
